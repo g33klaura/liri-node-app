@@ -1,4 +1,4 @@
-console.log('this is loaded');
+console.log('keys.js is loaded');
 
 // Keys for Twitter
 const twitterKeys = {
