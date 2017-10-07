@@ -1,7 +1,7 @@
 console.log('this is loaded');
 
 // Keys for Twitter
-var twitterKey = {
+const twitterKeys = {
 	consumer_key: 'S8stx48K48Rf8AXx4Gv8YT0Zl',
 	consumer_secret: '4dc443Pbygr6dQsLwwaDYPlZrC9IePRhmPcqDnPPxnTuszCCIQ',
 	access_token_key: '916407260955369472-wi7lWSKFPSaMP01YAHNuPOVyEHrMMBu',
@@ -20,7 +20,7 @@ var twitterKey = {
 // Export object
 // Q: OK THESE AREN'T BOTH SAME LABELS???
 module.exports = {
-	twitter: twitterKey,
+	twitter: twitterKeys,
 	// spotify: spotKey,
 	// omdb: omdbKey
 }
