@@ -3,13 +3,11 @@
 /* *Starting @ step 7*
 	[] at top of this script, write code needed to grab data from keys.js
 	[] need these commands to run:
-		[] my-tweets
+		[x] my-tweets
 		[] spotify-this-song
 		[] movie-this
 		[] do-what-it-says
 	[] check evernote list for what each command needs to do
-	[] 
-
 
 */
 
@@ -47,8 +45,8 @@ let twitterClient = new Twitter(keys.twitter);
 // Will need functions for each command needed
 function tweets() {
 	// display last 20 tweets w/ timestamp
-	// not sure about exclude_replies=true part....
-	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {count: 5}, function(error, tweets, response) {
+	// not sure about exclude_replies part....
+	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {count: 20, exclude_replies: true}, function(error, tweets, response) {
 			if (error) throw error;
 			// console.log(tweets);
 			// console.log(response);
@@ -60,6 +58,7 @@ function tweets() {
 			
 
 			// Gets a "twitterClient.get is not a function".....  ~fixed? Got a whole fuckload of data back... whoops....
+			// Updated count to 20, even though only have 10 tweets at the moment (Q: Do we really NEED more?)
 	});
 };
 
@@ -85,7 +84,7 @@ switch (command) {
 		console.log('do-what-it-says');
 		break;
 	default:
-		console.log('Invalid command');
+		console.log('Invalid command; go fish');
 		break;
 }
 
