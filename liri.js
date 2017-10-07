@@ -37,14 +37,24 @@ const fs = require('fs');
 // Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
 let command = process.argv[2];
 
+// let twitterClient = keys.twitter;
+let twitterClient = new Twitter(keys.twitter);
 
 
 // FUNCTIONS ====================
 //
 
 // Will need functions for each command needed
-const myTweets = () => {
+function tweets() {
 	// display last 20 tweets w/ timestamp
+	// not sure about exclude_replies=true part....
+	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', function(error, tweets, response) {
+			if (error) throw error;
+			console.log(tweets);
+			// console.log(response);
+
+			// Gets a "twitterClient.get is not a function".....  ~fixed? Got a whole fuckload of data back... whoops....
+	});
 };
 
 
@@ -56,7 +66,8 @@ const myTweets = () => {
 
 switch (command) {
 	case 'my-tweets':
-		console.log('my-tweets');
+		tweets();
+		console.log('tweets function called');
 		break;
 	case 'spotify-this-song':
 		console.log('spotify-this-song');
