@@ -48,10 +48,16 @@ let twitterClient = new Twitter(keys.twitter);
 function tweets() {
 	// display last 20 tweets w/ timestamp
 	// not sure about exclude_replies=true part....
-	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', function(error, tweets, response) {
+	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {count: 5}, function(error, tweets, response) {
 			if (error) throw error;
-			console.log(tweets);
+			// console.log(tweets);
 			// console.log(response);
+			for (var t = 0; t < tweets.length; t++) {
+				console.log(tweets[t].created_at);
+				console.log(tweets[t].text);
+				console.log('-------------');
+			};
+			
 
 			// Gets a "twitterClient.get is not a function".....  ~fixed? Got a whole fuckload of data back... whoops....
 	});
