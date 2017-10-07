@@ -19,9 +19,13 @@
 // 
 
 const keys = require('./assets/keys.js');
-	// console.log(keys);
+	// console.log(keys.twitter.consumer_key);
 
-// const fs = require('fs');
+const Twitter = require('twitter');
+const Spotify = require('node-spotify-api');
+const request = require('request');
+
+const fs = require('fs');
 
 
 
@@ -30,7 +34,7 @@ const keys = require('./assets/keys.js');
 // VARIABLES ====================
 // 
 
-// Stores command entered (ie. 'my-tweets', 'movie-this', etc.)
+// Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
 let command = process.argv[2];
 
 
@@ -39,6 +43,10 @@ let command = process.argv[2];
 //
 
 // Will need functions for each command needed
+const myTweets = () => {
+	// display last 20 tweets w/ timestamp
+};
+
 
 
 // MAIN PROCESS ====================
@@ -48,16 +56,16 @@ let command = process.argv[2];
 
 switch (command) {
 	case 'my-tweets':
-		// do this;
+		console.log('my-tweets');
 		break;
 	case 'spotify-this-song':
-		// do this;
+		console.log('spotify-this-song');
 		break;
 	case 'movie-this':
-		// do this;
+		console.log('movie-this');
 		break;
 	case 'do-what-it-says':
-		// do this;
+		console.log('do-what-it-says');
 		break;
 	default:
 		console.log('Invalid command');
