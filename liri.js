@@ -121,20 +121,25 @@ function songData() {
 	let songSearch = process.argv[3];
 		// console.log('songSearch: ' + songSearch);
 
-		if (songSearch === 'undefined') {
-			thisSong = 'the-sign';
+		if (songSearch === undefined) {
+			thisSong = 'The Sign Ace of Base';
+			// thisSong = 'the-sign&offset=12';
+
+			// **********try to impliment offset on this search
+
 			console.log('default song called');
 		} else {
 			thisSong = songSearch;
 		}
 
 	// Can I even get an undefined to log??? ~It DOES, so why the eff won't 'the-sign' become the default search term?!! :(
-	console.log('thisSong: ' + thisSong);
+	// ~FIXED!!!!
+	// console.log('thisSong: ' + thisSong);
 
 	let spotSearch = spotifyClient.search({
 			type: 'track',
 			query: thisSong,
-			limit: 1
+			limit: 1			
 	}, function(err, data) {
 			if (err) {
 				return console.log('Error occured: ' + err);
