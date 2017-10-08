@@ -77,13 +77,46 @@ function songData() {
 
 	// needs to grab process.argv[3] as song... 
 	// Q: what if multi word song tho......
-	let thisSong = process.argv[3];
+	// let nodeArgs = process.argv;
+
+	// Var to hold search string
+	// let thisSong = '';
+
+	// let songSearch = '';
+
+	// for (var i = 3; i < nodeArgs.length; i++) {
+	// 	thisSong = thisSong + '-' + nodeArgs[i];
+	// 	songSearch = thisSong.shift();
+	// }
+
+	// console.log(songSearch);
+	// console.log('-------------');
+
 		// [] need Switch to default to "The Sign" if no argument passed**********
+
+	// WORKS IF ALL ELSE FAILS....
+	// let songSearch = process.argv[3];
+	
+	let songSearch = process.argv[3];
+		switch (songSearch) {
+			case null:
+				songSearch = 'the-sign';
+					// ^^^Update with DIRECT LINK to the right ace of base song
+				console.log('default song called');
+				break;
+			default:
+				songSearch = process.argv[3];
+				console.log(songSearch);
+				break;
+		};
+
+	// let thisSong = 
+	// ^^USE THIS TO COMBINE EITHER 'THE SIGN' AS DEFAULT, OR ENTERED SEARCH TERM, AND USE AS QUERY TERM
 
 	let spotSearch = spotifyClient.search({
 			type: 'track',
 			query: thisSong,
-			limit: 2
+			limit: 1
 	}, function(err, data) {
 			if (err) {
 				return console.log('Error occured: ' + err);
