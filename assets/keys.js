@@ -10,7 +10,10 @@ const twitterKeys = {
 
 
 // Keys for Spotify
-
+const spotifyKeys = {
+	client_id: 'dd899244750342789b75a7b5ff6375d9',
+	client_secret: '2b7f04a1739b49bbb19f4b8947a118ed'
+};
 
 
 // Keys for OMDB
@@ -18,9 +21,9 @@ const twitterKeys = {
 
 
 // Export object
-// Q: OK THESE AREN'T BOTH SAME LABELS???
+// Q: OK THESE AREN'T BOTH SAME LABELS???  ~seems to be ok....
 module.exports = {
 	twitter: twitterKeys,
-	// spotify: spotKey,
+	spotify: spotifyKeys,
 	// omdb: omdbKey
 }

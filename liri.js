@@ -38,6 +38,10 @@ let command = process.argv[2];
 // let twitterClient = keys.twitter;
 let twitterClient = new Twitter(keys.twitter);
 
+let spotifyClient = new Spotify(keys.spotify);
+
+
+
 
 // FUNCTIONS ====================
 //
@@ -48,7 +52,7 @@ function tweets() {
 	// not sure about exclude_replies part....
 
 	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {
-			count: 20, 
+			count: 10, 
 			exclude_replies: true
 	}, function(error, tweets, response) {
 			if (error) throw error;
