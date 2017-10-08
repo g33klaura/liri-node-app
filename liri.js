@@ -147,20 +147,22 @@ function songData() {
 		for (var s = 0; s < spotData.length; s++) {
 			// console.log(spotData[s]);
 		
-		
-
 		// console.log('-------------');
 		// console.log(data.tracks.items);
 		// console.log(spotData);
 		console.log('-------------');
-		console.log(spotData[s].artists[0].name);
-		// console.log('-------------');
-		// console.log(spotData.name);
-		// console.log('-------------');
-		// console.log(spotData.preview_url);
-		// console.log('-------------');
-		// console.log(spotData.album.name);
-		// console.log('-------------');
+		console.log('Title: ' + spotData[s].name);
+		console.log('-------------');
+		console.log('By: ' + spotData[s].artists[0].name);
+		console.log('-------------');
+		console.log('Preview link: ' + spotData[s].preview_url);
+			// ^^Not all tracks have preview_url?????
+			// Maybe can get fancy and do if/else for null preview_url
+		console.log('-------------');
+		console.log('Alt preview link: ' + spotData[s].uri);
+		console.log('-------------');
+		console.log('Album: ' + spotData[s].album.name);
+		console.log('-------------');
 		};
 
 	});
