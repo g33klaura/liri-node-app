@@ -97,21 +97,39 @@ function songData() {
 	// WORKS IF ALL ELSE FAILS....
 	// let songSearch = process.argv[3];
 	
+
+	let thisSong = '';
+	// ^^USE THIS TO COMBINE EITHER 'THE SIGN' AS DEFAULT, OR ENTERED SEARCH TERM, AND USE AS QUERY TERM
+
+	/*
 	let songSearch = process.argv[3];
 		switch (songSearch) {
-			case null:
-				songSearch = 'the-sign';
-					// ^^^Update with DIRECT LINK to the right ace of base song
+			case 'undefined':
+				thisSong = 'the-sign';
+					// ^^^Update with DIRECT LINK to the right ace of base song when working
 				console.log('default song called');
 				break;
+
 			default:
-				songSearch = process.argv[3];
-				console.log(songSearch);
+				thisSong = process.argv[3];
+				console.log(thisSong);
 				break;
 		};
+		*/
+			// ^^Will grab entered search terms but still won't grab 'the-sign' as default :(
 
-	// let thisSong = 
-	// ^^USE THIS TO COMBINE EITHER 'THE SIGN' AS DEFAULT, OR ENTERED SEARCH TERM, AND USE AS QUERY TERM
+	let songSearch = process.argv[3];
+		// console.log('songSearch: ' + songSearch);
+
+		if (songSearch === 'undefined') {
+			thisSong = 'the-sign';
+			console.log('default song called');
+		} else {
+			thisSong = songSearch;
+		}
+
+	// Can I even get an undefined to log??? ~It DOES, so why the eff won't 'the-sign' become the default search term?!! :(
+	console.log('thisSong: ' + thisSong);
 
 	let spotSearch = spotifyClient.search({
 			type: 'track',
@@ -122,15 +140,31 @@ function songData() {
 				return console.log('Error occured: ' + err);
 			}
 		
-		// Drilling into returned object
-		// for (var s = 0; s < data.length; s++) {
-		// 	console.log(data[s]);
-		// };
-		console.log('-------------');
-		console.log(data.tracks.items);
-		console.log('-------------');
-	});
 
+		let spotData = data.tracks.items;
+		
+		// Drilling into returned object
+		for (var s = 0; s < spotData.length; s++) {
+			// console.log(spotData[s]);
+		
+		
+
+		// console.log('-------------');
+		// console.log(data.tracks.items);
+		// console.log(spotData);
+		console.log('-------------');
+		console.log(spotData[s].artists[0].name);
+		// console.log('-------------');
+		// console.log(spotData.name);
+		// console.log('-------------');
+		// console.log(spotData.preview_url);
+		// console.log('-------------');
+		// console.log(spotData.album.name);
+		// console.log('-------------');
+		};
+
+	});
+	// ^^Closes callback function
 };
 
 
