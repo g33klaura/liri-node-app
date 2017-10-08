@@ -1,7 +1,7 @@
 // JavaScript for LIRI-Bot
 // Steps to complete:
 /* *Starting @ step 7*
-	[] at top of this script, write code needed to grab data from keys.js
+	[x] at top of this script, write code needed to grab data from keys.js
 	[] need these commands to run:
 		[x] my-tweets
 		[] spotify-this-song
@@ -46,7 +46,11 @@ let twitterClient = new Twitter(keys.twitter);
 function tweets() {
 	// display last 20 tweets w/ timestamp
 	// not sure about exclude_replies part....
-	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {count: 20, exclude_replies: true}, function(error, tweets, response) {
+
+	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {
+			count: 20, 
+			exclude_replies: true
+	}, function(error, tweets, response) {
 			if (error) throw error;
 			// console.log(tweets);
 			// console.log(response);
@@ -55,11 +59,11 @@ function tweets() {
 				console.log(tweets[t].text);
 				console.log('-------------');
 			};
-			
-
-			// Gets a "twitterClient.get is not a function".....  ~fixed? Got a whole fuckload of data back... whoops....
-			// Updated count to 20, even though only have 10 tweets at the moment (Q: Do we really NEED more?)
-	});
+		});
+	// Trying to see why exclude_replies isn't working
+				// console.log('-------------');
+				// console.log(myTweets);
+				// console.log('-------------');
 };
 
 
@@ -70,19 +74,28 @@ function tweets() {
 // Need switch statment (or if/else) for each command possibility
 
 switch (command) {
+
 	case 'my-tweets':
+		// tweets function call
 		tweets();
 		console.log('tweets function called');
 		break;
+
 	case 'spotify-this-song':
+		// spotify function call
 		console.log('spotify-this-song');
 		break;
+
 	case 'movie-this':
+		// movie function call
 		console.log('movie-this');
 		break;
+
 	case 'do-what-it-says':
+		// do this function call
 		console.log('do-what-it-says');
 		break;
+
 	default:
 		console.log('Invalid command; go fish');
 		break;
