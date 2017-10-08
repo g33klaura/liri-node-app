@@ -47,6 +47,8 @@ let spotifyClient = new Spotify(keys.spotify);
 //
 
 // Will need functions for each command needed
+
+// Triggers on 'my-tweets' command
 function tweets() {
 	// display last 20 tweets w/ timestamp
 	// not sure about exclude_replies part....
@@ -70,6 +72,34 @@ function tweets() {
 				// console.log('-------------');
 };
 
+// Triggers on 'spotify-this-song' command
+function songData() {
+
+	// needs to grab process.argv[3] as song... 
+	// Q: what if multi word song tho......
+	let thisSong = process.argv[3];
+		// [] need Switch to default to "The Sign" if no argument passed**********
+
+	let spotSearch = spotifyClient.search({
+			type: 'track',
+			query: thisSong,
+			limit: 2
+	}, function(err, data) {
+			if (err) {
+				return console.log('Error occured: ' + err);
+			}
+		
+		// Drilling into returned object
+		// for (var s = 0; s < data.length; s++) {
+		// 	console.log(data[s]);
+		// };
+		console.log('-------------');
+		console.log(data.tracks.items);
+		console.log('-------------');
+	});
+
+};
+
 
 
 // MAIN PROCESS ====================
@@ -87,17 +117,18 @@ switch (command) {
 
 	case 'spotify-this-song':
 		// spotify function call
-		console.log('spotify-this-song');
+		songData();
+		console.log('spotify-this-song called');
 		break;
 
 	case 'movie-this':
 		// movie function call
-		console.log('movie-this');
+		console.log('movie-this called');
 		break;
 
 	case 'do-what-it-says':
 		// do this function call
-		console.log('do-what-it-says');
+		console.log('do-what-it-says called');
 		break;
 
 	default:
