@@ -62,7 +62,7 @@ function tweets() {
 			// console.log(tweets);
 			// console.log(response);
 			for (var t = 0; t < tweets.length; t++) {
-				console.log(tweets[t].created_at);
+				console.log('\n' + tweets[t].created_at);
 				console.log(tweets[t].text);
 				console.log('-------------');
 			};
@@ -132,6 +132,26 @@ function songData() {
 };
 
 
+// Triggers on 'movie-this' command
+function movieThis() {
+
+	/*
+	Needs to log:
+	[] title
+	[] year
+	[] imdb rating
+	[] rotten tomatoes rating
+	[] country produced
+	[] language
+	[] plot
+	[] actors
+	*/
+
+		
+
+};
+
+
 
 
 // MAIN PROCESS ====================
@@ -155,6 +175,7 @@ switch (command) {
 
 	case 'movie-this':
 		// movie function call
+		movieThis();
 		console.log('movie-this called');
 		break;
 
