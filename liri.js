@@ -1,14 +1,13 @@
 // JavaScript for LIRI-Bot
+
 // Steps to complete:
 /* *Starting @ step 7*
 	[x] at top of this script, write code needed to grab data from keys.js
 	[] need these commands to run:
 		[x] my-tweets
 		[x] spotify-this-song
-		[] movie-this
+		[x] movie-this
 		[] do-what-it-says
-	[] check evernote list for what each command needs to do
-
 */
 
 
@@ -33,9 +32,9 @@ const fs = require('fs');
 
 	// TWITTER: Grabbed this from "For User Based Authentication" on twitter npm docs
 	// The login keys are saved to my keys.js with an export at the bottom of it
-let twitterClient = new Twitter(keys.twitter);
+const twitterClient = new Twitter(keys.twitter);
 
-let spotifyClient = new Spotify(keys.spotify);
+const spotifyClient = new Spotify(keys.spotify);
 
 // Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
 let command = process.argv[2];
@@ -43,6 +42,7 @@ let command = process.argv[2];
 // Stores song search string
 let thisSong = '';
 
+// Stores movie search string
 let thisMovie = '';
 
 
@@ -53,7 +53,7 @@ let thisMovie = '';
 // Triggers on 'my-tweets' command
 function tweets() {
 
-		// TWITTER: grabbed example from "REST API" part of twitter npm doc
+	// TWITTER: grabbed example from "REST API" part of twitter npm doc
 	// display last 20 tweets w/ timestamp
 	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {
 			count: 10, 
@@ -90,18 +90,16 @@ function songData() {
 		// 	thisSong = songSearch;
 		// }
 
+		// Stopped responding to undefined case once I added encodeURIComponent... need to try taking that off to see if undefined will work again. I like how that looks.
 		switch (songSearch) {
-			case undefined:
+			// case undefined:
+			case '':
 			thisSong = 'The Sign Ace of Base';
 			break;
 		default:
 			thisSong = songSearch;
 			break;
 		}
-
-	// Can I even get an undefined to log??? ~It DOES, so why the eff won't 'the-sign' become the default search term?!! :(
-	// ~FIXED!!!!
-	// console.log('thisSong: ' + thisSong);
 
 	let spotSearch = spotifyClient.search({
 			type: 'track',
@@ -196,18 +194,34 @@ function movieThis() {
 				console.log('-------------');
 			}
 		});
-	/*
-	Needs to log:
-	[x] title
-	[x] year
-	[x] imdb rating
-	[x] rotten tomatoes rating
-	[x] country produced
-	[x] language
-	[x] plot
-	[x] actors
-	[] defaults to Mr. Nobody if nothing entered
-	*/
+};
+
+
+// Triggers on 'do-what-it-says' command
+function doTheThing() {
+
+	fs.readFile('./assets/random.txt', 'utf8', function(error, data) {
+
+		if (error) {
+			console.log(error);
+		}
+
+		console.log(data);
+
+		let dataArray = data.split(',');
+		console.log(dataArray);
+
+		command = dataArray[0];
+			console.log('New command: ' + command);
+		// dataArray[1] = search term
+		// songSearch = dataArray[1];
+			// console.log(songSearch);
+		// songData();
+		// Should this just be in a switch statement??
+
+		// *****Left off here. How to turn dataArray[1] into the search term of each function.........
+
+	})
 };
 
 
@@ -240,6 +254,7 @@ switch (command) {
 
 	case 'do-what-it-says':
 		// do this function call
+		doTheThing();
 		console.log('do-what-it-says called');
 		break;
 
@@ -247,6 +262,3 @@ switch (command) {
 		console.log('Invalid command; go fish');
 		break;
 }
-
-
-
