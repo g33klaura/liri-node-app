@@ -77,14 +77,24 @@ function tweets() {
 // Triggers on 'spotify-this-song' command
 function songData() {
 
-	let songSearch = process.argv[3];
+	// let songSearch = process.argv[3];
+	let songSearch = encodeURIComponent(process.argv.slice(3));
 		// console.log('songSearch: ' + songSearch);
 
-		if (songSearch === undefined) {
-			thisSong = 'The Sign Ace of Base';
+		// if (songSearch === undefined) {
+		// 	thisSong = 'The Sign Ace of Base';
 			// console.log('default song called');
-		} else {
+		// } else {
+		// 	thisSong = songSearch;
+		// }
+
+		switch (songSearch) {
+			case undefined:
+			thisSong = 'The Sign Ace of Base';
+			break;
+		default:
 			thisSong = songSearch;
+			break;
 		}
 
 	// Can I even get an undefined to log??? ~It DOES, so why the eff won't 'the-sign' become the default search term?!! :(
@@ -96,6 +106,7 @@ function songData() {
 			query: thisSong,
 			limit: 1			
 	}, function(err, data) {
+			
 			if (err) {
 				return console.log('Error occured: ' + err);
 			}
@@ -111,21 +122,16 @@ function songData() {
 		// console.log(spotData);
 		console.log('-------------');
 		console.log('Title: ' + spotData[s].name);
-
 		console.log('\nArtist: ' + spotData[s].artists[0].name);
-
 		console.log('\nPreview link: ' + spotData[s].preview_url);
 			// ^^Not all tracks have preview_url?????
 			// Maybe can get fancy and do if/else for null preview_url
-
 		console.log('\nAlt preview link: ' + spotData[s].uri);
-
 		console.log('\nAlbum: ' + spotData[s].album.name);
 		console.log('-------------');
 		
 		// console.log('\nTitle: ${spotData[s].name} \nArtist: ${spotData[s].artists[0].name}');
 			// Trying cleaned up way Dave did....
-
 		};
 	});
 	// ^^Closes callback function
