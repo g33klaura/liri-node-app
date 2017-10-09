@@ -142,6 +142,18 @@ function songData() {
 function movieThis() {
 
 	let thisMovie = encodeURIComponent(process.argv.slice(3));
+	// let movieSearch = encodeURIComponent(process.argv.slice(3));
+
+	// switch (movieSearch) {
+	// 		case undefined:
+	// 		thisMovie = encodeURIComponent('Mr. Nobody');
+	// 		console.log('default movie called');
+	// 		break;
+	// 	default:
+	// 		thisMovie = movieSearch;
+	// 		break;
+	// 	}
+
 
 		console.log(thisMovie);
 		// console.log(encodeURI(movieArgs));
@@ -175,12 +187,14 @@ function movieThis() {
 				console.log('Language: ' + movieData.Language);
 				console.log('Synopsis: "' + movieData.Plot + '"');
 				console.log('Starring: ' + movieData.Actors);
+
 				// for (var m = 0; m < movieData.length; m++) { 
 				// 	console.log('-------------');
 				// 	// console.log(movieData[0].title);
 				// 	console.log(movieData[m].title);
 				// 	console.log('loop ran');
 				// }
+				
 				console.log('-------------');
 			}
 		});
