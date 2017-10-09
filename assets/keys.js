@@ -1,4 +1,4 @@
-console.log('keys.js is loaded');
+console.log('keys.js loaded');
 
 // Keys for Twitter
 const twitterKeys = {
@@ -11,13 +11,13 @@ const twitterKeys = {
 
 // Keys for Spotify
 const spotifyKeys = {
-	client_id: 'dd899244750342789b75a7b5ff6375d9',
-	client_secret: '2b7f04a1739b49bbb19f4b8947a118ed'
+	id: 'dd899244750342789b75a7b5ff6375d9',
+	secret: '2b7f04a1739b49bbb19f4b8947a118ed'
 };
 
 
 // Keys for OMDB
-
+const omdbKey = '40e9cece';
 
 
 // Export object
@@ -25,5 +25,5 @@ const spotifyKeys = {
 module.exports = {
 	twitter: twitterKeys,
 	spotify: spotifyKeys,
-	// omdb: omdbKey
+	omdb: omdbKey
 }
