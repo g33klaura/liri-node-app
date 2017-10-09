@@ -4,7 +4,7 @@
 	[x] at top of this script, write code needed to grab data from keys.js
 	[] need these commands to run:
 		[x] my-tweets
-		[] spotify-this-song
+		[x] spotify-this-song
 		[] movie-this
 		[] do-what-it-says
 	[] check evernote list for what each command needs to do
@@ -28,19 +28,19 @@ const fs = require('fs');
 
 
 
-
 // VARIABLES ====================
 // 
+
+let twitterClient = new Twitter(keys.twitter);
+let spotifyClient = new Spotify(keys.spotify);
 
 // Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
 let command = process.argv[2];
 
-// let twitterClient = keys.twitter;
-let twitterClient = new Twitter(keys.twitter);
-let spotifyClient = new Spotify(keys.spotify);
-
+// Stores song search string
 let thisSong = '';
 
+let thisMovie = '';
 
 
 
@@ -146,8 +146,30 @@ function movieThis() {
 	[] plot
 	[] actors
 	*/
+	let movieArgs = encodeURIComponent(process.argv.slice(3));
 
-		
+		console.log(movieArgs);
+		// console.log(encodeURI(movieArgs));
+
+		// thisMovie = movieArgs.join('-');
+		// console.log(thisMovie);
+
+		// thisMovie = encodeURI(movieArgs);
+		// console.log(thisMovie);
+
+
+		// for (var m = 3; m < movieArgs.length; m++) {
+
+		// 	thisMovie = encodeURI(movieArgs);
+
+		// }
+
+
+
+	// let titleSearch = encodeURI(process.argv[m])
+
+	// 'http://www.omdbapi.com/?apikey=' + keys.omdb + '&';
+	// request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie + )
 
 };
 
