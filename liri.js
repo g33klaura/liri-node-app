@@ -135,17 +135,6 @@ function songData() {
 // Triggers on 'movie-this' command
 function movieThis() {
 
-	/*
-	Needs to log:
-	[] title
-	[] year
-	[] imdb rating
-	[] rotten tomatoes rating
-	[] country produced
-	[] language
-	[] plot
-	[] actors
-	*/
 	// let movieArgs = encodeURIComponent(process.argv.slice(3));
 	let thisMovie = encodeURIComponent(process.argv.slice(3));
 
@@ -167,13 +156,37 @@ function movieThis() {
 	request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie, function(error, response, body) {
 			if (!error && response.statusCode === 200) {
 
-				console.log(JSON.parse(body));
+				// console.log(JSON.parse(body));
 				// console.log('-------------');
 				// console.log(JSON.stringify(body, null, 2));
 
-			}
-	})
+				let movieData = JSON.parse(body);
+				console.log(movieData);
+				console.log('-------------');
+				console.log(movieData.Title);
+				console.log('\n' + movieData.Year);
+				console.log('\n' + movieData.Ratings[0].Source.Value);
+				// for (var m = 0; m < movieData.length; m++) { 
+				// 	console.log('-------------');
+				// 	// console.log(movieData[0].title);
+				// 	console.log(movieData[m].title);
+				// 	console.log('loop ran');
+				// }
 
+			}
+		});
+	/*
+	Needs to log:
+	[x] title
+	[] year
+	[] imdb rating
+	[] rotten tomatoes rating
+	[] country produced
+	[] language
+	[] plot
+	[] actors
+	[] defaults to Mr. Nobody if nothing entered
+	*/
 };
 
 
