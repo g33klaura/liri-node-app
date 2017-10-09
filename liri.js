@@ -135,7 +135,6 @@ function songData() {
 // Triggers on 'movie-this' command
 function movieThis() {
 
-	// let movieArgs = encodeURIComponent(process.argv.slice(3));
 	let thisMovie = encodeURIComponent(process.argv.slice(3));
 
 		console.log(thisMovie);
@@ -150,8 +149,7 @@ function movieThis() {
 		// for (var m = 3; m < movieArgs.length; m++) {
 		// 	thisMovie = encodeURI(movieArgs);
 		// }
-
-	// let titleSearch = encodeURI(process.argv[m])
+		// let titleSearch = encodeURI(process.argv[m])
 
 	request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie, function(error, response, body) {
 			if (!error && response.statusCode === 200) {
@@ -161,30 +159,35 @@ function movieThis() {
 				// console.log(JSON.stringify(body, null, 2));
 
 				let movieData = JSON.parse(body);
-				console.log(movieData);
+				// console.log(movieData);
 				console.log('-------------');
 				console.log(movieData.Title);
-				console.log('\n' + movieData.Year);
-				console.log('\n' + movieData.Ratings[0].Source.Value);
+				console.log('Released: ' + movieData.Year);
+				console.log('Rated ' + movieData.Ratings[0].Value + ' by IMDB');
+				console.log('Rated ' + movieData.Ratings[1].Value + ' by Rotten Tomatoes');
+				console.log('Country of Origin: ' + movieData.Country);
+				console.log('Language: ' + movieData.Language);
+				console.log('Synopsis: "' + movieData.Plot + '"');
+				console.log('Starring: ' + movieData.Actors);
 				// for (var m = 0; m < movieData.length; m++) { 
 				// 	console.log('-------------');
 				// 	// console.log(movieData[0].title);
 				// 	console.log(movieData[m].title);
 				// 	console.log('loop ran');
 				// }
-
+				console.log('-------------');
 			}
 		});
 	/*
 	Needs to log:
 	[x] title
-	[] year
-	[] imdb rating
-	[] rotten tomatoes rating
-	[] country produced
-	[] language
-	[] plot
-	[] actors
+	[x] year
+	[x] imdb rating
+	[x] rotten tomatoes rating
+	[x] country produced
+	[x] language
+	[x] plot
+	[x] actors
 	[] defaults to Mr. Nobody if nothing entered
 	*/
 };
