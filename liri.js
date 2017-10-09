@@ -146,9 +146,10 @@ function movieThis() {
 	[] plot
 	[] actors
 	*/
-	let movieArgs = encodeURIComponent(process.argv.slice(3));
+	// let movieArgs = encodeURIComponent(process.argv.slice(3));
+	let thisMovie = encodeURIComponent(process.argv.slice(3));
 
-		console.log(movieArgs);
+		console.log(thisMovie);
 		// console.log(encodeURI(movieArgs));
 
 		// thisMovie = movieArgs.join('-');
@@ -157,19 +158,21 @@ function movieThis() {
 		// thisMovie = encodeURI(movieArgs);
 		// console.log(thisMovie);
 
-
 		// for (var m = 3; m < movieArgs.length; m++) {
-
 		// 	thisMovie = encodeURI(movieArgs);
-
 		// }
-
-
 
 	// let titleSearch = encodeURI(process.argv[m])
 
-	// 'http://www.omdbapi.com/?apikey=' + keys.omdb + '&';
-	// request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie + )
+	request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie, function(error, response, body) {
+			if (!error && response.statusCode === 200) {
+
+				console.log(JSON.parse(body));
+				// console.log('-------------');
+				// console.log(JSON.stringify(body, null, 2));
+
+			}
+	})
 
 };
 
