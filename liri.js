@@ -31,7 +31,10 @@ const fs = require('fs');
 // VARIABLES ====================
 // 
 
+	// TWITTER: Grabbed this from "For User Based Authentication" on twitter npm docs
+	// The login keys are saved to my keys.js with an export at the bottom of it
 let twitterClient = new Twitter(keys.twitter);
+
 let spotifyClient = new Spotify(keys.spotify);
 
 // Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
@@ -47,17 +50,16 @@ let thisMovie = '';
 // FUNCTIONS ====================
 //
 
-// [] Will need functions for each command needed
-
 // Triggers on 'my-tweets' command
 function tweets() {
-	// display last 20 tweets w/ timestamp
-	// not sure about exclude_replies part....
 
+		// TWITTER: grabbed example from "REST API" part of twitter npm doc
+	// display last 20 tweets w/ timestamp
 	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {
 			count: 10, 
 			exclude_replies: true
 	}, function(error, tweets, response) {
+
 			if (error) throw error;
 			// console.log(tweets);
 			// console.log(response);
@@ -141,19 +143,21 @@ function songData() {
 // Triggers on 'movie-this' command
 function movieThis() {
 
-	let thisMovie = encodeURIComponent(process.argv.slice(3));
-	// let movieSearch = encodeURIComponent(process.argv.slice(3));
+	// let thisMovie = encodeURIComponent(process.argv.slice(3));
+	let movieSearch = encodeURIComponent(process.argv.slice(3));
 
-	// switch (movieSearch) {
-	// 		case undefined:
-	// 		thisMovie = encodeURIComponent('Mr. Nobody');
-	// 		console.log('default movie called');
-	// 		break;
-	// 	default:
-	// 		thisMovie = movieSearch;
-	// 		break;
-	// 	}
+		console.log('movieSearch is: ' + movieSearch);
 
+	switch (movieSearch) {
+			// case null:
+			case undefined:
+			thisMovie = encodeURIComponent('Mr. Nobody');
+			console.log('default movie called');
+			break;
+		default:
+			thisMovie = movieSearch;
+			break;
+		}
 
 		console.log(thisMovie);
 		// console.log(encodeURI(movieArgs));
@@ -194,7 +198,7 @@ function movieThis() {
 				// 	console.log(movieData[m].title);
 				// 	console.log('loop ran');
 				// }
-				
+
 				console.log('-------------');
 			}
 		});
