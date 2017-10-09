@@ -37,8 +37,9 @@ let command = process.argv[2];
 
 // let twitterClient = keys.twitter;
 let twitterClient = new Twitter(keys.twitter);
-
 let spotifyClient = new Spotify(keys.spotify);
+
+let thisSong = '';
 
 
 
@@ -46,7 +47,7 @@ let spotifyClient = new Spotify(keys.spotify);
 // FUNCTIONS ====================
 //
 
-// Will need functions for each command needed
+// [] Will need functions for each command needed
 
 // Triggers on 'my-tweets' command
 function tweets() {
@@ -72,62 +73,16 @@ function tweets() {
 				// console.log('-------------');
 };
 
+
 // Triggers on 'spotify-this-song' command
 function songData() {
-
-	// needs to grab process.argv[3] as song... 
-	// Q: what if multi word song tho......
-	// let nodeArgs = process.argv;
-
-	// Var to hold search string
-	// let thisSong = '';
-
-	// let songSearch = '';
-
-	// for (var i = 3; i < nodeArgs.length; i++) {
-	// 	thisSong = thisSong + '-' + nodeArgs[i];
-	// 	songSearch = thisSong.shift();
-	// }
-
-	// console.log(songSearch);
-	// console.log('-------------');
-
-		// [] need Switch to default to "The Sign" if no argument passed**********
-
-	// WORKS IF ALL ELSE FAILS....
-	// let songSearch = process.argv[3];
-	
-
-	let thisSong = '';
-	// ^^USE THIS TO COMBINE EITHER 'THE SIGN' AS DEFAULT, OR ENTERED SEARCH TERM, AND USE AS QUERY TERM
-
-	/*
-	let songSearch = process.argv[3];
-		switch (songSearch) {
-			case 'undefined':
-				thisSong = 'the-sign';
-					// ^^^Update with DIRECT LINK to the right ace of base song when working
-				console.log('default song called');
-				break;
-
-			default:
-				thisSong = process.argv[3];
-				console.log(thisSong);
-				break;
-		};
-		*/
-			// ^^Will grab entered search terms but still won't grab 'the-sign' as default :(
 
 	let songSearch = process.argv[3];
 		// console.log('songSearch: ' + songSearch);
 
 		if (songSearch === undefined) {
 			thisSong = 'The Sign Ace of Base';
-			// thisSong = 'the-sign&offset=12';
-
-			// **********try to impliment offset on this search
-
-			console.log('default song called');
+			// console.log('default song called');
 		} else {
 			thisSong = songSearch;
 		}
@@ -145,7 +100,6 @@ function songData() {
 				return console.log('Error occured: ' + err);
 			}
 		
-
 		let spotData = data.tracks.items;
 		
 		// Drilling into returned object
@@ -157,22 +111,26 @@ function songData() {
 		// console.log(spotData);
 		console.log('-------------');
 		console.log('Title: ' + spotData[s].name);
-		console.log('-------------');
-		console.log('By: ' + spotData[s].artists[0].name);
-		console.log('-------------');
-		console.log('Preview link: ' + spotData[s].preview_url);
+
+		console.log('\nArtist: ' + spotData[s].artists[0].name);
+
+		console.log('\nPreview link: ' + spotData[s].preview_url);
 			// ^^Not all tracks have preview_url?????
 			// Maybe can get fancy and do if/else for null preview_url
-		console.log('-------------');
-		console.log('Alt preview link: ' + spotData[s].uri);
-		console.log('-------------');
-		console.log('Album: ' + spotData[s].album.name);
-		console.log('-------------');
-		};
 
+		console.log('\nAlt preview link: ' + spotData[s].uri);
+
+		console.log('\nAlbum: ' + spotData[s].album.name);
+		console.log('-------------');
+		
+		// console.log('\nTitle: ${spotData[s].name} \nArtist: ${spotData[s].artists[0].name}');
+			// Trying cleaned up way Dave did....
+
+		};
 	});
 	// ^^Closes callback function
 };
+
 
 
 
@@ -186,7 +144,7 @@ switch (command) {
 	case 'my-tweets':
 		// tweets function call
 		tweets();
-		console.log('tweets function called');
+		console.log('my-tweets called');
 		break;
 
 	case 'spotify-this-song':
