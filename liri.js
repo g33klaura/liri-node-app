@@ -150,10 +150,12 @@ function movieThis() {
 
 	switch (movieSearch) {
 			// case null:
-			case undefined:
+			// case undefined:
+			case '':
 			thisMovie = encodeURIComponent('Mr. Nobody');
 			console.log('default movie called');
 			break;
+
 		default:
 			thisMovie = movieSearch;
 			break;
@@ -191,14 +193,6 @@ function movieThis() {
 				console.log('Language: ' + movieData.Language);
 				console.log('Synopsis: "' + movieData.Plot + '"');
 				console.log('Starring: ' + movieData.Actors);
-
-				// for (var m = 0; m < movieData.length; m++) { 
-				// 	console.log('-------------');
-				// 	// console.log(movieData[0].title);
-				// 	console.log(movieData[m].title);
-				// 	console.log('loop ran');
-				// }
-
 				console.log('-------------');
 			}
 		});
