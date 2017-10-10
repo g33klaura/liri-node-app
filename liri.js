@@ -30,14 +30,14 @@ const fs = require('fs');
 // VARIABLES ====================
 // 
 
-	// TWITTER: Grabbed this from "For User Based Authentication" on twitter npm docs
-	// The login keys are saved to my keys.js with an export at the bottom of it
 const twitterClient = new Twitter(keys.twitter);
-
 const spotifyClient = new Spotify(keys.spotify);
 
 // Stores command entered in terminal (ie. 'my-tweets', 'movie-this', etc.)
 let command = process.argv[2];
+
+// Captures terminal input after command
+let songSearch = '';
 
 // Stores song search string
 let thisSong = '';
@@ -53,7 +53,6 @@ let thisMovie = '';
 // Triggers on 'my-tweets' command
 function tweets() {
 
-	// TWITTER: grabbed example from "REST API" part of twitter npm doc
 	// display last 20 tweets w/ timestamp
 	let myTweets = twitterClient.get('https://api.twitter.com/1.1/statuses/home_timeline.json', {
 			count: 10, 
@@ -69,7 +68,7 @@ function tweets() {
 				console.log('-------------');
 			};
 		});
-	// Trying to see why exclude_replies isn't working
+				// Trying to see why exclude_replies isn't working
 				// console.log('-------------');
 				// console.log(myTweets);
 				// console.log('-------------');
@@ -79,7 +78,7 @@ function tweets() {
 // Triggers on 'spotify-this-song' command
 function songData() {
 
-	let songSearch = encodeURIComponent(process.argv.slice(3));
+	songSearch = encodeURIComponent(process.argv.slice(3));
 		// console.log('songSearch: ' + songSearch);
 
 		// if (songSearch === undefined) {
@@ -92,11 +91,11 @@ function songData() {
 		switch (songSearch) {
 			// case undefined:
 			case '':
-			thisSong = 'The Sign Ace of Base';
-			break;
-		default:
-			thisSong = songSearch;
-			break;
+				thisSong = 'The Sign Ace of Base';
+				break;
+			default:
+				thisSong = songSearch;
+				break;
 		}
 
 	let spotSearch = spotifyClient.search({
@@ -109,28 +108,22 @@ function songData() {
 				return console.log('Error occured: ' + err);
 			}
 		
-		let spotData = data.tracks.items;
+			let spotData = data.tracks.items;
 		
-		// Drilling into returned object
-		for (var s = 0; s < spotData.length; s++) {
-			// console.log(spotData[s]);
+			// Drilling into returned object
+			for (var s = 0; s < spotData.length; s++) {
+				// console.log(spotData[s]);
 		
-		// console.log('-------------');
-		// console.log(data.tracks.items);
-		// console.log(spotData);
-		console.log('-------------');
-		console.log('Title: ' + spotData[s].name);
-		console.log('\nArtist: ' + spotData[s].artists[0].name);
-		console.log('\nPreview link: ' + spotData[s].preview_url);
-			// ^^Not all tracks have preview_url?????
-			// Maybe can get fancy and do if/else for null preview_url
-		console.log('\nAlt preview link: ' + spotData[s].uri);
-		console.log('\nAlbum: ' + spotData[s].album.name);
-		console.log('-------------');
-		
-		// console.log('\nTitle: ${spotData[s].name} \nArtist: ${spotData[s].artists[0].name}');
-			// Trying cleaned up way Dave did....
-		};
+				// console.log(data.tracks.items);
+				// console.log(spotData);
+				console.log('-------------');
+				console.log('Title: ' + spotData[s].name);
+				console.log('\nArtist: ' + spotData[s].artists[0].name);
+				console.log('\nPreview link: ' + spotData[s].preview_url);
+				console.log('\nAlt preview link: ' + spotData[s].uri);
+				console.log('\nAlbum: ' + spotData[s].album.name);
+				console.log('-------------');
+			};
 	});
 	// ^^Closes callback function
 };
@@ -204,50 +197,51 @@ function doTheThing() {
 			console.log(error);
 		}
 
+		// Log raw file data
 		console.log(data);
 
+		// Contents of file stored in array
 		let dataArray = data.split(',');
 		console.log(dataArray);
 
+		// Command string from file becomes new "command" function trigger
 		command = dataArray[0];
-			console.log('New command: ' + command);
-		// dataArray[1] = search term
-		// songSearch = dataArray[1];
-			// console.log(songSearch);
-		// songData();
-		// Should this just be in a switch statement??
+			// console.log('New command: ' + command);
 
 		switch (command) {
 
 			case 'my-tweets':
 				// tweets function call
+				// Nothing to edit for this to work*************
 				tweets();
-				console.log('my-tweets called');
+				console.log('my-tweets called from file');
 			break;
 
 			case 'spotify-this-song':
 				// value of dataArray[1] stored in songSearch
 				songSearch = dataArray.slice(1);
-					console.log(songSearch);
-				// spotify function call
+					console.log(songSearch + ' :songSearch in doTheThing');
+					
+					// #####################################
+					// new spotify function call
 				songData();
-				console.log('spotify-this-song called');
+				console.log('spotify-this-song called from file');
 			break;
 
 			case 'movie-this':
 				// movie function call
 				movieThis();
-				console.log('movie-this called');
+				console.log('movie-this called from file');
 			break;
 
-			case 'do-what-it-says':
+			// case 'do-what-it-says':
 				// do this function call
-				doTheThing();
-				console.log('do-what-it-says called');
-			break;
+				// doTheThing();
+				// console.log('do-what-it-says called');
+			// break;
 
 			default:
-				console.log('Invalid command; go fish again');
+				console.log('Invalid command from file; go fish again');
 			break;
 		};
 
