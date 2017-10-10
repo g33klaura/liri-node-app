@@ -3,11 +3,11 @@
 // Steps to complete:
 /* *Starting @ step 7*
 	[x] at top of this script, write code needed to grab data from keys.js
-	[] need these commands to run:
+	[x] need these commands to run:
 		[x] my-tweets
 		[x] spotify-this-song
 		[x] movie-this
-		[] do-what-it-says
+		[x] do-what-it-says
 */
 
 
@@ -319,6 +319,34 @@ function doTheThing() {
 };
 
 
+// Log entries to text file
+function logData() {
+
+	let logs = command;
+	//need to store user input into var to append to file....
+
+	// let userCommand = command;
+	// 	console.log(userCommand);
+
+	// let userQuery = '';
+
+	// switch (userCommand) {
+	// 	case 'spotify-this-song':
+	// 		userQuery = 
+	// }
+
+
+	fs.appendFile('./assets/log.txt', logs + '\n', function(err) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			console.log('Content added');
+		}
+	});
+}
+
+
 
 
 // MAIN PROCESS ====================
@@ -326,33 +354,40 @@ function doTheThing() {
 
 // Need switch statment (or if/else) for each command possibility
 
+
+
 switch (command) {
 
 	case 'my-tweets':
 		// tweets function call
 		tweets();
 		console.log('my-tweets called');
+		logData()
 		break;
 
 	case 'spotify-this-song':
 		// spotify function call
 		songData();
 		console.log('spotify-this-song called');
+		logData()
 		break;
 
 	case 'movie-this':
 		// movie function call
 		movieThis();
 		console.log('movie-this called');
+		logData()
 		break;
 
 	case 'do-what-it-says':
 		// do this function call
 		doTheThing();
 		console.log('do-what-it-says called');
+		logData()
 		break;
 
 	default:
 		console.log('Invalid command; go fish');
+		logData()
 		break;
 }
