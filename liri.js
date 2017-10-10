@@ -79,7 +79,6 @@ function tweets() {
 // Triggers on 'spotify-this-song' command
 function songData() {
 
-	// let songSearch = process.argv[3];
 	let songSearch = encodeURIComponent(process.argv.slice(3));
 		// console.log('songSearch: ' + songSearch);
 
@@ -90,7 +89,6 @@ function songData() {
 		// 	thisSong = songSearch;
 		// }
 
-		// Stopped responding to undefined case once I added encodeURIComponent... need to try taking that off to see if undefined will work again. I like how that looks.
 		switch (songSearch) {
 			// case undefined:
 			case '':
@@ -219,9 +217,41 @@ function doTheThing() {
 		// songData();
 		// Should this just be in a switch statement??
 
-		// *****Left off here. How to turn dataArray[1] into the search term of each function.........
+		switch (command) {
 
-	})
+			case 'my-tweets':
+				// tweets function call
+				tweets();
+				console.log('my-tweets called');
+			break;
+
+			case 'spotify-this-song':
+				// value of dataArray[1] stored in songSearch
+				songSearch = dataArray.slice(1);
+					console.log(songSearch);
+				// spotify function call
+				songData();
+				console.log('spotify-this-song called');
+			break;
+
+			case 'movie-this':
+				// movie function call
+				movieThis();
+				console.log('movie-this called');
+			break;
+
+			case 'do-what-it-says':
+				// do this function call
+				doTheThing();
+				console.log('do-what-it-says called');
+			break;
+
+			default:
+				console.log('Invalid command; go fish again');
+			break;
+		};
+
+	});
 };
 
 
