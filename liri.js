@@ -208,8 +208,8 @@ function doTheThing() {
 		command = dataArray[0];
 			// console.log('New command: ' + command);
 
+		// Controlled by new command value (as determined by file)
 		switch (command) {
-
 			case 'my-tweets':
 				// tweets function call
 				// Nothing to edit for this to work*************
@@ -219,14 +219,46 @@ function doTheThing() {
 
 			case 'spotify-this-song':
 				// value of dataArray[1] stored in songSearch
-				songSearch = dataArray.slice(1);
+				songSearch = encodeURIComponent(dataArray.slice(1));
 					console.log(songSearch + ' :songSearch in doTheThing');
 					
-					// #####################################
-					// new spotify function call
-				songData();
+				// ################New Spotify#####################
+				// new spotify action
+				switch (songSearch) {
+					case '':
+						thisSong = 'The Sign Ace of Base';
+						break;
+					default:
+						thisSong = songSearch;
+						break;
+				}
+
+				let spotSearch = spotifyClient.search({
+					type: 'track',
+					query: thisSong,
+					limit: 1			
+				}, function(err, data) {
+			
+					if (err) {
+						return console.log('Error occured: ' + err);
+					}
+		
+					let spotData = data.tracks.items;
+		
+					// Drilling into returned object
+					for (var s = 0; s < spotData.length; s++) {
+						console.log('-------------');
+						console.log('Title: ' + spotData[s].name);
+						console.log('\nArtist: ' + spotData[s].artists[0].name);
+						console.log('\nPreview link: ' + spotData[s].preview_url);
+						console.log('\nAlt preview link: ' + spotData[s].uri);
+						console.log('\nAlbum: ' + spotData[s].album.name);
+						console.log('-------------');
+					};
+				});
 				console.log('spotify-this-song called from file');
 			break;
+				// ################End New Spotify#####################
 
 			case 'movie-this':
 				// movie function call
@@ -234,11 +266,9 @@ function doTheThing() {
 				console.log('movie-this called from file');
 			break;
 
-			// case 'do-what-it-says':
-				// do this function call
-				// doTheThing();
-				// console.log('do-what-it-says called');
-			// break;
+			case 'do-what-it-says':
+				console.log('What is this, Inception? Try something else');
+			break;
 
 			default:
 				console.log('Invalid command from file; go fish again');
