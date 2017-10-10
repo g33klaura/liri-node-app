@@ -258,20 +258,60 @@ function doTheThing() {
 				});
 				console.log('spotify-this-song called from file');
 			break;
+
 				// ################End New Spotify#####################
+
 
 			case 'movie-this':
 				// movie function call
-				movieThis();
+				// movieThis();
+
+				movieSearch = encodeURIComponent(dataArray.slice(1));
+					console.log(movieSearch + ' :movieSearch in doTheThing');
+
+					// ################New OMDB#####################
+
+				switch (movieSearch) {
+					case '':
+					thisMovie = encodeURIComponent('Mr. Nobody');
+					console.log('default movie called');
+					break;
+
+				default:
+					thisMovie = movieSearch;
+					break;
+				}
+
+				console.log(thisMovie);
+
+				request('http://www.omdbapi.com/?apikey=' + keys.omdb + '&t=' + thisMovie, function(error, response, body) {
+					if (!error && response.statusCode === 200) {
+
+						let movieData = JSON.parse(body);
+							console.log('-------------');
+							console.log(movieData.Title);
+							console.log('Released: ' + movieData.Year);
+							console.log('Rated ' + movieData.Ratings[0].Value + ' by IMDB');
+							console.log('Rated ' + movieData.Ratings[1].Value + ' by Rotten Tomatoes');
+							console.log('Country of Origin: ' + movieData.Country);
+							console.log('Language: ' + movieData.Language);
+							console.log('Synopsis: "' + movieData.Plot + '"');
+							console.log('Starring: ' + movieData.Actors);
+							console.log('-------------');
+					}
+				});
 				console.log('movie-this called from file');
 			break;
 
+					// ################End New OMDB#####################
+
+
 			case 'do-what-it-says':
-				console.log('What is this, Inception? Try something else');
+				console.log('What is this, Inception? Try a different command.');
 			break;
 
 			default:
-				console.log('Invalid command from file; go fish again');
+				console.log('Invalid command from file; go fish.');
 			break;
 		};
 
