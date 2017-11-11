@@ -6,7 +6,7 @@
 
 
 ## Technologies Used
-Node.js, APIs for Twitter, Spotify, & OMDB
+Node.js, `node-spotify`, `request`, and `twitter` NPM packages, APIs for Twitter, Spotify, & OMDB
 
 
 ### Application Video
