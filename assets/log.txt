@@ -1,2 +1,6 @@
 my-tweets
 spotify-this-song
+my-tweets
+spotify-this-song
+movie-this
+movie-this
