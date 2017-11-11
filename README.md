@@ -9,13 +9,11 @@
 Node.js, `node-spotify`, `request`, and `twitter` NPM packages, APIs for Twitter, Spotify, & OMDB
 
 
-### Application Video
+<!-- ### Application Video -->
 <!-- Link example -->
 <!-- [Video of application in action][2c341124]
 
   [2c341124]: https://github.com/g33klaura/bamazon/blob/master/screenshots/bamazonCustomer_view.mov "Process Video" -->
-
-
 ### Key Features
 * `my-tweets` command: Returns all tweets for default user account
 * `spotify-this-song` command: Returns data for song title entered
@@ -24,10 +22,12 @@ Node.js, `node-spotify`, `request`, and `twitter` NPM packages, APIs for Twitter
 
 
 ### Screenshots
-<!-- ![Alt Text](url)
-###### Image caption -->
+![my-tweets](screenshots/1my_tweets_screen.png)
+###### `my-tweets` command called
+
+![spotify-this-song](screenshots/2spotify_song_screen.png)
+###### `spotify-this-song` command called with "killer queen" search value
 
 
-### Application Process
-* 
-
+<!-- ### Application Process
+*  -->
